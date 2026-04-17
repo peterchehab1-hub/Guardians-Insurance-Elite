@@ -1,0 +1,68 @@
+
+import { Service, TeamMember, Partner } from './types.ts';
+
+export const SERVICES_DATA: Service[] = [
+  {
+    id: 'home',
+    title: 'Home Insurance',
+    icon: '🏠',
+    shortDescription: 'Comprehensive protection for your home and belongings.',
+    fullDescription: 'Our home insurance covers fire, theft, natural disasters, and third-party liability. We ensure your most valuable asset is protected against unforeseen circumstances with 24/7 support and fast claim processing.',
+    image: '/home-insurance.png'
+  },
+  {
+    id: 'car',
+    title: 'Car Insurance',
+    icon: '🚗',
+    shortDescription: 'Flexible coverage for all your road adventures.',
+    fullDescription: 'From comprehensive plans to third-party liability, our auto insurance keeps you moving. Includes roadside assistance, towing services, and coverage for accidental damage or theft across Lebanon.',
+    image: '/car-insurance.png'
+  },
+  {
+    id: 'medical',
+    title: 'Medical Insurance',
+    icon: '🏥',
+    shortDescription: 'Health first. World-class medical coverage.',
+    fullDescription: 'Access to the top hospitals and clinics in the country. Our plans cover outpatient consultations, surgeries, medications, and maternity with competitive premiums tailored for individuals and families.',
+    image: '/medical-insurance.png'
+  },
+  {
+    id: 'life',
+    title: 'Life Insurance',
+    icon: '🛡️',
+    shortDescription: 'Secure your family\'s future and financial stability.',
+    fullDescription: 'Life is unpredictable. Ensure your loved ones are financially protected. Our life insurance offers term and whole-life policies that provide peace of mind and long-term security.',
+    image: '/life-insurance.png'
+  },
+  {
+    id: 'travel',
+    title: 'Travel Insurance',
+    icon: '✈️',
+    shortDescription: 'Worry-free journeys around the globe.',
+    fullDescription: 'Whether it is for business or leisure, our travel insurance covers medical emergencies abroad, trip cancellations, lost luggage, and flight delays. Compliant with Schengen visa requirements.',
+    image: '/travel-insurance.png'
+  },
+  {
+    id: 'business',
+    title: 'Business Insurance',
+    icon: '💼',
+    shortDescription: 'Protecting your enterprise and professional assets.',
+    fullDescription: 'Tailored solutions for businesses of all sizes. From property and liability to employee benefits and cargo protection, we help your business thrive with confidence.',
+    image: '/business-insurance.png'
+  }
+];
+
+export const TEAM_MEMBERS: TeamMember[] = [
+  { name: 'Elias Harb', role: 'Chief Executive Officer', image: 'https://picsum.photos/id/1011/300/300' },
+  { name: 'Sarah Mansour', role: 'Head of Operations', image: 'https://picsum.photos/id/1027/300/300' },
+  { name: 'John Doe', role: 'Senior Risk Analyst', image: 'https://picsum.photos/id/1005/300/300' },
+  { name: 'Laila Koussa', role: 'Claims Manager', image: 'https://picsum.photos/id/1012/300/300' }
+];
+
+export const PARTNERS: Partner[] = [
+  { name: 'Bankers', logo: 'https://placehold.co/200x100/1e3a5f/ffffff?text=Bankers' },
+  { name: 'Fidelity', logo: 'https://placehold.co/200x100/1e3a5f/ffffff?text=Fidelity' },
+  { name: 'UFA', logo: 'https://placehold.co/200x100/1e3a5f/ffffff?text=UFA' },
+  { name: 'Solidarity', logo: 'https://placehold.co/200x100/1e3a5f/ffffff?text=Solidarity' },
+  { name: 'Securite', logo: 'https://placehold.co/200x100/1e3a5f/ffffff?text=Securite' }
+];

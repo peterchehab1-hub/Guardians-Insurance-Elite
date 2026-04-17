@@ -1,0 +1,180 @@
+
+import React from 'react';
+import { motion } from 'motion/react';
+import { Shield, Award, Users, Clock, Target, Briefcase, CheckCircle2 } from 'lucide-react';
+import { TEAM_MEMBERS, PARTNERS } from '../constants.tsx';
+
+const About: React.FC = () => {
+  return (
+    <div className="flex flex-col">
+      {/* Header Section */}
+      <section className="bg-steel-blue py-24 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-teal-primary rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-5xl md:text-6xl font-black text-white mb-6"
+          >
+            Our Story
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
+          >
+            Leading Lebanon with integrity and a commitment to local protection since 2019.
+          </motion.p>
+        </div>
+      </section>
+
+      {/* Story & Heritage */}
+      <section className="py-24 bg-bg-light">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-20 items-center mb-24">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="order-2 md:order-1"
+            >
+              <div className="inline-flex items-center px-4 py-1 rounded-full bg-teal-primary/10 text-teal-primary text-xs font-black tracking-widest uppercase mb-6 border border-teal-primary/20">
+                <Shield className="w-4 h-4 mr-2" />
+                <span>Our Heritage</span>
+              </div>
+              <h2 className="text-4xl font-black text-text-dark mb-8">Proudly Lebanese-Owned</h2>
+              <p className="text-gray-500 text-lg leading-relaxed mb-6">
+                Founded in 2019 in the heart of Beirut, Guardians Insurance was established to bridge the gap between corporate insurance and local needs. We understand the unique challenges faced by Lebanese citizens and businesses.
+              </p>
+              <p className="text-gray-500 text-lg leading-relaxed mb-10">
+                We operate on the principle that insurance should be personal, transparent, and absolutely reliable when the unexpected happens. Our mission is to provide a safety net that allows our community to thrive.
+              </p>
+              <div className="flex space-x-12">
+                <div>
+                  <div className="text-4xl font-black text-teal-primary">25k+</div>
+                  <div className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-2">Active Clients</div>
+                </div>
+                <div>
+                  <div className="text-4xl font-black text-teal-primary">98%</div>
+                  <div className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-2">Satisfaction</div>
+                </div>
+              </div>
+            </motion.div>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="order-1 md:order-2"
+            >
+              <div className="relative">
+                <img src="/home-insurance.png" alt="Lebanon Landscape" className="rounded-[3rem] shadow-2xl border border-white/5" referrerPolicy="no-referrer" />
+                <div className="absolute -bottom-6 -right-6 bg-teal-primary p-8 rounded-3xl shadow-2xl hidden lg:block">
+                  <Award className="w-12 h-12 text-white" />
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* What is Insurance Section */}
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-steel-blue p-16 rounded-[3rem] mb-24 text-center border border-white/10 shadow-2xl relative overflow-hidden"
+          >
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-teal-primary to-transparent"></div>
+            <h2 className="text-4xl font-black text-white mb-8">What is Insurance?</h2>
+            <p className="text-blue-100 text-xl leading-relaxed max-w-4xl mx-auto">
+              Insurance is your financial safety net. It is a strategic contract that protects you from large, unexpected expenses. By paying a small regular premium, you transfer the burden of risk to us, ensuring your family and business stay resilient in any crisis.
+            </p>
+          </motion.div>
+
+          {/* Feature Cards Section */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
+            {[
+              { t: 'Expert Advice', d: 'Personalized risk assessment by industry veterans.', icon: <Users className="w-8 h-8" /> },
+              { t: 'Top Insurers', d: 'Partnered with the strongest names in Lebanon.', icon: <Briefcase className="w-8 h-8" /> },
+              { t: '24/7 Support', d: 'Always available when you need us most.', icon: <Clock className="w-8 h-8" /> },
+              { t: 'Tailored Solutions', d: 'Plans built specifically for your lifestyle.', icon: <Target className="w-8 h-8" /> }
+            ].map((card, i) => (
+              <motion.div 
+                key={i} 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="bg-white p-10 rounded-[2.5rem] border border-gray-100 hover:border-teal-primary/30 transition-all text-center group hover:-translate-y-2 shadow-xl"
+              >
+                <div className="text-teal-primary mb-6 flex justify-center transform group-hover:scale-110 transition-transform">{card.icon}</div>
+                <h3 className="text-xl font-black text-text-dark mb-4">{card.t}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{card.d}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Partners Section */}
+      <section className="py-24 bg-steel-blue">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-20">
+          <h2 className="text-4xl font-black text-white mb-4">Strategic Partners</h2>
+          <p className="text-blue-100 text-lg">We work with the strongest names in the industry to ensure your total safety.</p>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-8 items-center">
+            {PARTNERS.map((partner, i) => (
+              <motion.div 
+                key={i} 
+                whileHover={{ scale: 1.05 }}
+                className="bg-white/5 p-8 rounded-3xl border border-white/5 hover:border-teal-primary/30 transition-all group flex items-center justify-center grayscale hover:grayscale-0"
+              >
+                <img src={partner.logo} alt={partner.name} className="max-h-10 w-auto opacity-50 group-hover:opacity-100 transition-opacity" referrerPolicy="no-referrer" />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Team Grid */}
+      <section className="py-24 bg-bg-light">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-20">
+          <h2 className="text-5xl font-black text-text-dark mb-4">Meet Our Experts</h2>
+          <p className="text-gray-500 text-lg">The dedicated professionals behind Guardians Insurance.</p>
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+            {TEAM_MEMBERS.map((member, i) => (
+              <motion.div 
+                key={i} 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="group"
+              >
+                <div className="relative overflow-hidden rounded-[2.5rem] mb-6 h-96 shadow-2xl border border-gray-100">
+                  <img src={member.image} alt={member.name} className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110" referrerPolicy="no-referrer" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-steel-blue/90 via-steel-blue/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
+                    <div className="text-white">
+                      <p className="font-black text-xl mb-1">{member.name}</p>
+                      <p className="text-sm text-teal-primary font-bold uppercase tracking-widest">{member.role}</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="px-4 text-center">
+                  <h3 className="text-text-dark font-black text-xl mb-1">{member.name}</h3>
+                  <p className="text-teal-primary text-xs font-bold uppercase tracking-widest">{member.role}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default About;
