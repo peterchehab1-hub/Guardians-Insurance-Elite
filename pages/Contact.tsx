@@ -50,8 +50,7 @@ const Contact: React.FC = () => {
                   <h3 className="text-2xl font-black text-text-dark">Call/SMS</h3>
                 </div>
                 <div className="space-y-2 text-gray-500 text-lg">
-                  <p>Hotline: <span className="text-text-dark font-bold">1234</span> (Local)</p>
-                  <p>Intl: <span className="text-text-dark font-bold">(+961) 71971213</span></p>
+                  <p>Phone: <span className="text-text-dark font-bold">(+961) 71971213</span></p>
                 </div>
               </motion.div>
 
@@ -69,8 +68,7 @@ const Contact: React.FC = () => {
                   <h3 className="text-2xl font-black text-text-dark">Email Us</h3>
                 </div>
                 <div className="space-y-2 text-gray-500 text-lg">
-                  <p>General: <span className="text-text-dark font-bold">peterchehab98@gmail.com</span></p>
-                  <p>Support: <span className="text-text-dark font-bold">support@guardians.lb</span></p>
+                  <p>Email: <span className="text-text-dark font-bold">peterchehab98@gmail.com</span></p>
                 </div>
               </motion.div>
 
