@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { X, ArrowRight, Info, Phone, Mail, User, ShieldCheck } from 'lucide-react';
+import { X, ArrowRight, Info, Phone, Mail, User, ShieldCheck, Send, CheckCircle2, ChevronLeft } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { SERVICES_DATA } from '../constants.tsx';
 import { Service } from '../types.ts';
@@ -15,6 +15,8 @@ interface ExtendedService extends Service {
 
 const Services: React.FC = () => {
   const [selectedService, setSelectedService] = useState<ExtendedService | null>(null);
+  const [showQuoteForm, setShowQuoteForm] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const openModal = (service: Service) => {
     const extended: ExtendedService = {
@@ -30,7 +32,14 @@ const Services: React.FC = () => {
 
   const closeModal = () => {
     setSelectedService(null);
+    setShowQuoteForm(false);
+    setIsSubmitted(false);
     document.body.style.overflow = 'auto';
+  };
+
+  const handleQuoteSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitted(true);
   };
 
   return (
@@ -129,54 +138,132 @@ const Services: React.FC = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white hidden lg:block"></div>
                 </div>
                 <div className="lg:w-1/2 p-10 lg:p-16">
-                  <div className="inline-flex items-center px-4 py-1 rounded-full bg-teal-primary/10 text-teal-primary text-xs font-black tracking-widest uppercase mb-8 border border-teal-primary/20">
-                    <ShieldCheck className="w-4 h-4 mr-2" />
-                    <span>{selectedService.title} PLAN</span>
-                  </div>
-                  <h2 className="text-5xl font-black text-text-dark mb-8">{selectedService.title}</h2>
-                  <div className="prose text-gray-500 mb-10 text-lg leading-relaxed">
-                    <p>{selectedService.fullDescription}</p>
-                  </div>
+                  {!showQuoteForm ? (
+                    <>
+                      <div className="inline-flex items-center px-4 py-1 rounded-full bg-teal-primary/10 text-teal-primary text-xs font-black tracking-widest uppercase mb-8 border border-teal-primary/20">
+                        <ShieldCheck className="w-4 h-4 mr-2" />
+                        <span>{selectedService.title} PLAN</span>
+                      </div>
+                      <h2 className="text-5xl font-black text-text-dark mb-8">{selectedService.title}</h2>
+                      <div className="prose text-gray-500 mb-10 text-lg leading-relaxed">
+                        <p>{selectedService.fullDescription}</p>
+                      </div>
 
-                  {/* Contact & Relevant Info Box */}
-                  <div className="bg-gray-50 p-8 rounded-3xl border border-gray-100 space-y-4 mb-10">
-                      <div className="flex justify-between items-center text-sm">
-                          <div className="flex items-center text-gray-400 font-bold uppercase tracking-widest text-[10px]">
-                            <User className="w-4 h-4 mr-2" />
-                            <span>Consultant</span>
+                      {/* Contact & Relevant Info Box */}
+                      <div className="bg-gray-50 p-8 rounded-3xl border border-gray-100 space-y-4 mb-10">
+                          <div className="flex justify-between items-center text-sm">
+                              <div className="flex items-center text-gray-400 font-bold uppercase tracking-widest text-[10px]">
+                                <User className="w-4 h-4 mr-2" />
+                                <span>Consultant</span>
+                              </div>
+                              <span className="text-text-dark font-bold">{selectedService.agent}</span>
                           </div>
-                          <span className="text-text-dark font-bold">{selectedService.agent}</span>
-                      </div>
-                      <div className="flex justify-between items-center text-sm">
-                          <div className="flex items-center text-gray-400 font-bold uppercase tracking-widest text-[10px]">
-                            <Phone className="w-4 h-4 mr-2" />
-                            <span>Phone</span>
+                          <div className="flex justify-between items-center text-sm">
+                              <div className="flex items-center text-gray-400 font-bold uppercase tracking-widest text-[10px]">
+                                <Phone className="w-4 h-4 mr-2" />
+                                <span>Phone</span>
+                              </div>
+                              <span className="text-teal-primary font-bold">{selectedService.contact}</span>
                           </div>
-                          <span className="text-teal-primary font-bold">{selectedService.contact}</span>
-                      </div>
-                      <div className="flex justify-between items-center text-sm">
-                          <div className="flex items-center text-gray-400 font-bold uppercase tracking-widest text-[10px]">
-                            <Mail className="w-4 h-4 mr-2" />
-                            <span>Email</span>
+                          <div className="flex justify-between items-center text-sm">
+                              <div className="flex items-center text-gray-400 font-bold uppercase tracking-widest text-[10px]">
+                                <Mail className="w-4 h-4 mr-2" />
+                                <span>Email</span>
+                              </div>
+                              <span className="text-gray-600 font-medium">{selectedService.email}</span>
                           </div>
-                          <span className="text-gray-600 font-medium">{selectedService.email}</span>
+                          <div className="pt-4 border-t border-gray-100 mt-4">
+                              <p className="text-xs text-gray-400 italic leading-relaxed">
+                                <span className="font-bold text-gray-400 uppercase not-italic mr-2">Policy Info:</span> 
+                                {selectedService.relevantInfo}
+                              </p>
+                          </div>
                       </div>
-                      <div className="pt-4 border-t border-gray-100 mt-4">
-                          <p className="text-xs text-gray-400 italic leading-relaxed">
-                            <span className="font-bold text-gray-400 uppercase not-italic mr-2">Policy Info:</span> 
-                            {selectedService.relevantInfo}
-                          </p>
-                      </div>
-                  </div>
 
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    <button className="flex-grow bg-teal-primary hover:bg-teal-primary/90 text-white py-5 rounded-2xl font-black text-lg shadow-xl transition-all transform active:scale-95 uppercase tracking-widest">
-                      GET QUOTE
-                    </button>
-                    <button className="flex-grow bg-transparent border-2 border-gray-100 hover:border-gray-200 text-text-dark py-5 rounded-2xl font-bold text-lg transition-all transform active:scale-95">
-                      COMPARE
-                    </button>
-                  </div>
+                      <div className="flex flex-col sm:flex-row gap-4">
+                        <button 
+                          onClick={() => setShowQuoteForm(true)}
+                          className="w-full bg-teal-primary hover:bg-teal-primary/90 text-white py-5 rounded-2xl font-black text-lg shadow-xl transition-all transform active:scale-95 uppercase tracking-widest"
+                        >
+                          GET QUOTE
+                        </button>
+                      </div>
+                    </>
+                  ) : (
+                    <motion.div 
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      className="h-full flex flex-col"
+                    >
+                      {!isSubmitted ? (
+                        <>
+                          <button 
+                            onClick={() => setShowQuoteForm(false)}
+                            className="flex items-center text-gray-400 hover:text-teal-primary transition-colors text-xs font-bold uppercase tracking-widest mb-8 group"
+                          >
+                            <ChevronLeft className="w-4 h-4 mr-1 group-hover:-translate-x-1 transition-transform" />
+                            Back to Details
+                          </button>
+                          <h2 className="text-4xl font-black text-text-dark mb-4">Request a Quote</h2>
+                          <p className="text-gray-500 mb-8 font-medium">Please provide your details for <span className="text-teal-primary font-bold">{selectedService.title}</span>.</p>
+                          
+                          <form onSubmit={handleQuoteSubmit} className="space-y-6">
+                            <div>
+                              <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Your Full Name</label>
+                              <input 
+                                required 
+                                type="text" 
+                                placeholder="e.g. Jean Khoury" 
+                                className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-teal-primary transition-all font-medium" 
+                              />
+                            </div>
+                            <div>
+                              <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Phone or Email</label>
+                              <input 
+                                required 
+                                type="text" 
+                                placeholder="+961 or email@example.com" 
+                                className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-teal-primary transition-all font-medium" 
+                              />
+                            </div>
+                            <div>
+                              <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Additional Note</label>
+                              <textarea 
+                                rows={3} 
+                                placeholder="Tell us more about your specific needs..." 
+                                className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-teal-primary transition-all font-medium resize-none" 
+                              />
+                            </div>
+                            <button 
+                              type="submit"
+                              className="w-full bg-teal-primary hover:bg-teal-primary/90 text-white py-5 rounded-2xl font-black text-lg shadow-xl transition-all transform active:scale-95 flex items-center justify-center space-x-3 uppercase tracking-widest"
+                            >
+                              <span>Send Request</span>
+                              <Send className="w-5 h-5" />
+                            </button>
+                          </form>
+                        </>
+                      ) : (
+                        <motion.div 
+                          initial={{ scale: 0.9, opacity: 0 }}
+                          animate={{ scale: 1, opacity: 1 }}
+                          className="flex flex-col items-center justify-center text-center h-full py-12"
+                        >
+                          <div className="w-24 h-24 bg-teal-primary/10 rounded-full flex items-center justify-center mb-8">
+                            <CheckCircle2 className="w-12 h-12 text-teal-primary" />
+                          </div>
+                          <h2 className="text-4xl font-black text-text-dark mb-4">Request Sent!</h2>
+                          <p className="text-gray-500 text-lg mb-10 max-w-sm">Thank you for your interest. A consultant will reach out to you within 24 hours.</p>
+                          <button 
+                            onClick={closeModal}
+                            className="bg-steel-blue text-white px-10 py-4 rounded-2xl font-bold transition-all hover:bg-deep-blue"
+                          >
+                            Close Window
+                          </button>
+                        </motion.div>
+                      )}
+                    </motion.div>
+                  )}
                 </div>
               </div>
             </motion.div>
