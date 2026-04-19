@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, CheckCircle2, ArrowRight, ShieldCheck, PhoneCall, Zap, MapPin } from 'lucide-react';
 import { motion } from 'motion/react';
 import { SERVICES_DATA } from '../constants.tsx';
-import heroBackground from '../assets/hero-background.png';
-import whatIsInsuranceImg from '../assets/what-is-insurance.png';
 
 const Home: React.FC = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -28,7 +26,7 @@ const Home: React.FC = () => {
       <section className="relative h-[85vh] flex items-center bg-steel-blue overflow-hidden">
         <div className="absolute inset-0 opacity-30">
           <img 
-            src={heroBackground} 
+            src="/hero-background.png" 
             alt="Hero Background" 
             className="w-full h-full object-cover"
           />
@@ -99,7 +97,7 @@ const Home: React.FC = () => {
               className="relative"
             >
               <div className="rounded-3xl overflow-hidden shadow-2xl border border-white/5">
-                <img src={whatIsInsuranceImg} alt="Insurance Guide" className="w-full h-auto" />
+                <img src="/what-is-insurance.png" alt="Insurance Guide" className="w-full h-auto" />
               </div>
               <div className="absolute -bottom-8 -left-8 bg-teal-primary p-10 rounded-3xl shadow-2xl hidden lg:block">
                 <div className="text-5xl font-black text-white">7+</div>

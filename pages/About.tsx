@@ -4,7 +4,6 @@ import { motion } from 'motion/react';
 import { Shield, Award, Users, Clock, Target, Briefcase, CheckCircle2 } from 'lucide-react';
 import { TESTIMONIALS, PARTNERS } from '../constants.tsx';
 import { Quote } from 'lucide-react';
-import aboutHeritageImg from '../assets/about-heritage.png';
 
 const About: React.FC = () => {
   return (
@@ -62,7 +61,7 @@ const About: React.FC = () => {
               className="order-1 md:order-2"
             >
               <div className="relative">
-                <img src={aboutHeritageImg} alt="Lebanon Landscape" className="rounded-[3rem] shadow-2xl border border-white/5" />
+                <img src="/about-heritage.png" alt="Lebanon Landscape" className="rounded-[3rem] shadow-2xl border border-white/5" />
                 <div className="absolute -bottom-6 -right-6 bg-teal-primary p-8 rounded-3xl shadow-2xl hidden lg:block">
                   <Award className="w-12 h-12 text-white" />
                 </div>
