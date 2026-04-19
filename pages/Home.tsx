@@ -53,7 +53,6 @@ const Home: React.FC = () => {
             src="/images/hero-background.png" 
             alt="Hero Background" 
             className="w-full h-full object-cover"
-            referrerPolicy="no-referrer"
           />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
@@ -136,7 +135,7 @@ const Home: React.FC = () => {
               className="relative"
             >
               <div className="rounded-3xl overflow-hidden shadow-2xl border border-white/5">
-                <img src="/images/what-is-insurance.png" alt="Insurance Guide" className="w-full h-auto" referrerPolicy="no-referrer" />
+                <img src="/images/what-is-insurance.png" alt="Insurance Guide" className="w-full h-auto" />
               </div>
               <div className="absolute -bottom-8 -left-8 bg-teal-primary p-10 rounded-3xl shadow-2xl hidden lg:block">
                 <div className="text-5xl font-black text-white">7+</div>
@@ -180,7 +179,6 @@ const Home: React.FC = () => {
                     src={service.image} 
                     alt={service.title} 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                    referrerPolicy="no-referrer"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-60"></div>
                 </div>

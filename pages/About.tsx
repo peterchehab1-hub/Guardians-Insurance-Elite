@@ -61,7 +61,7 @@ const About: React.FC = () => {
               className="order-1 md:order-2"
             >
               <div className="relative">
-                <img src="/images/about-heritage.png" alt="Lebanon Landscape" className="rounded-[3rem] shadow-2xl border border-white/5" referrerPolicy="no-referrer" />
+                <img src="/images/about-heritage.png" alt="Lebanon Landscape" className="rounded-[3rem] shadow-2xl border border-white/5" />
                 <div className="absolute -bottom-6 -right-6 bg-teal-primary p-8 rounded-3xl shadow-2xl hidden lg:block">
                   <Award className="w-12 h-12 text-white" />
                 </div>
@@ -159,7 +159,7 @@ const About: React.FC = () => {
                 whileHover={{ scale: 1.05 }}
                 className="bg-white/5 p-8 rounded-3xl border border-white/5 hover:border-teal-primary/30 transition-all group flex items-center justify-center grayscale hover:grayscale-0"
               >
-                <img src={partner.logo} alt={partner.name} className="max-h-10 w-auto opacity-50 group-hover:opacity-100 transition-opacity" referrerPolicy="no-referrer" />
+                <img src={partner.logo} alt={partner.name} className="max-h-10 w-auto opacity-50 group-hover:opacity-100 transition-opacity" />
               </motion.div>
             ))}
           </div>
@@ -190,7 +190,7 @@ const About: React.FC = () => {
                   "{testimonial.content}"
                 </p>
                 <div className="flex items-center space-x-6 border-t border-gray-100 pt-8">
-                  <img src={testimonial.image} alt={testimonial.name} className="w-16 h-16 rounded-2xl object-cover shadow-md" referrerPolicy="no-referrer" />
+                  <img src={testimonial.image} alt={testimonial.name} className="w-16 h-16 rounded-2xl object-cover shadow-md" />
                   <div>
                     <h4 className="text-text-dark font-black text-lg leading-tight mb-1">{testimonial.name}</h4>
                     <p className="text-teal-primary text-[10px] font-bold uppercase tracking-widest">{testimonial.role}</p>
