@@ -43,13 +43,13 @@ const Header: React.FC = () => {
                 {link.name}
               </Link>
             ))}
-            <a 
-              href="/login.html"
+            <Link 
+              to="/login?role=client"
               className="bg-teal-primary hover:bg-teal-primary/90 text-white px-5 py-2 rounded-full text-sm font-semibold transition-all shadow-md flex items-center space-x-2"
             >
               <LogIn className="w-4 h-4" />
               <span>Login</span>
-            </a>
+            </Link>
           </nav>
 
           {/* Mobile menu button */}
@@ -86,13 +86,14 @@ const Header: React.FC = () => {
                   {link.name}
                 </Link>
               ))}
-              <a 
-                href="/login.html"
+              <Link 
+                to="/login?role=client"
+                onClick={() => setIsOpen(false)}
                 className="w-full text-left px-3 py-2 rounded-md text-base font-medium bg-teal-primary text-white mt-2 flex items-center space-x-2"
               >
                 <LogIn className="w-4 h-4" />
                 <span>Login</span>
-              </a>
+              </Link>
             </div>
           </motion.div>
         )}

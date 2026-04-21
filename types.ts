@@ -29,6 +29,15 @@ export interface Testimonial {
 }
 
 export type InsuranceType = 'car' | 'medical' | 'travel' | 'life' | 'home' | 'business';
+export type UserRole = 'admin' | 'staff' | 'client';
+
+export interface UserProfile {
+  uid: string;
+  email: string;
+  role: UserRole;
+  displayName?: string;
+  clientId?: string; // Links a client user to their client record
+}
 
 export interface ComparisonResult {
   company: string;

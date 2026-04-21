@@ -2,11 +2,12 @@
   "entities": {
     "user": {
       "title": "User",
-      "description": "App user (admin or staff)",
+      "description": "App user (admin, staff, or client)",
       "type": "object",
       "properties": {
         "email": { "type": "string", "format": "email" },
-        "role": { "type": "string", "enum": ["admin", "staff"] },
+        "role": { "type": "string", "enum": ["admin", "staff", "client"] },
+        "clientId": { "type": "string" },
         "createdAt": { "type": "string", "format": "date-time" }
       },
       "required": ["email", "role", "createdAt"]

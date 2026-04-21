@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../src/lib/firebase';
+import { doc, getDoc } from 'firebase/firestore';
+import { auth, db } from '../src/lib/firebase';
 import { motion } from 'motion/react';
-import { LogIn, Mail, Lock, AlertCircle } from 'lucide-react';
+import { LogIn, Mail, Lock, AlertCircle, Shield, User } from 'lucide-react';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -11,6 +12,8 @@ const Login: React.FC = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const roleParam = searchParams.get('role') || 'client'; // Default to client
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,8 +21,28 @@ const Login: React.FC = () => {
     setError('');
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      navigate('/dashboard');
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Fetch user profile to verify role
+      const userDoc = await getDoc(doc(db, 'users', user.uid));
+      
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        if (userData.role === 'client') {
+          navigate('/client-dashboard');
+        } else {
+          navigate('/dashboard');
+        }
+      } else {
+        // If no profile, we can't be sure, but let's try to infer from roleParam for now
+        // This is a fallback if user doc hasn't been created yet
+        if (roleParam === 'admin' || roleParam === 'staff') {
+          navigate('/dashboard');
+        } else {
+          navigate('/client-dashboard');
+        }
+      }
     } catch (err: any) {
       console.error(err);
       setError('Invalid email or password. Please try again.');
@@ -27,6 +50,8 @@ const Login: React.FC = () => {
       setLoading(false);
     }
   };
+
+  const isClient = roleParam === 'client';
 
   return (
     <div className="min-h-[80vh] flex items-center justify-center bg-bg-light px-4 py-12">
@@ -36,11 +61,17 @@ const Login: React.FC = () => {
         className="max-w-md w-full bg-white rounded-[2.5rem] shadow-2xl p-10 border border-gray-100"
       >
         <div className="text-center mb-10">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-teal-primary/10 text-teal-primary mb-6">
-            <LogIn className="w-8 h-8" />
+          <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6 ${isClient ? 'bg-teal-primary/10 text-teal-primary' : 'bg-steel-blue/10 text-steel-blue'}`}>
+            {isClient ? <User className="w-8 h-8" /> : <Shield className="w-8 h-8" />}
           </div>
-          <h1 className="text-3xl font-black text-text-dark mb-2">Admin Login</h1>
-          <p className="text-gray-500">Access the Guardians management system</p>
+          <h1 className="text-3xl font-black text-text-dark mb-2">
+            {isClient ? 'Client Login' : 'Admin Login'}
+          </h1>
+          <p className="text-gray-500">
+            {isClient 
+              ? 'Access your policies and track payments' 
+              : 'Access the Guardians management system'}
+          </p>
         </div>
 
         {error && (

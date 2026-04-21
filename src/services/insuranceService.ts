@@ -68,6 +68,16 @@ export const insuranceService = {
     }
   },
 
+  async getAllClients() {
+    try {
+      const q = query(collection(db, CLIENTS_COLLECTION), orderBy('createdAt', 'desc'));
+      const snapshot = await getDocs(q);
+      return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    } catch (error) {
+      return handleFirestoreError(error, 'list', CLIENTS_COLLECTION);
+    }
+  },
+
   // --- Policies ---
   async createPolicy(policyData: any, pdfFile?: File) {
     try {
@@ -84,6 +94,49 @@ export const insuranceService = {
       return docRef.id;
     } catch (error) {
       return handleFirestoreError(error, 'create', POLICIES_COLLECTION);
+    }
+  },
+
+  async getAllPolicies() {
+    try {
+      const q = query(collection(db, POLICIES_COLLECTION), orderBy('createdAt', 'desc'));
+      const snapshot = await getDocs(q);
+      return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    } catch (error) {
+      return handleFirestoreError(error, 'list', POLICIES_COLLECTION);
+    }
+  },
+
+  async getPoliciesByClientId(clientId: string) {
+    try {
+      const q = query(collection(db, POLICIES_COLLECTION), where('clientId', '==', clientId), orderBy('createdAt', 'desc'));
+      const snapshot = await getDocs(q);
+      return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    } catch (error) {
+      return handleFirestoreError(error, 'list', POLICIES_COLLECTION);
+    }
+  },
+
+  // --- Payments ---
+  async getAllPayments() {
+    try {
+      const q = query(collection(db, 'payments'), orderBy('date', 'desc'));
+      const snapshot = await getDocs(q);
+      return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    } catch (error) {
+      return handleFirestoreError(error, 'list', 'payments');
+    }
+  },
+
+  async createPayment(paymentData: any) {
+    try {
+      const docRef = await addDoc(collection(db, 'payments'), {
+        ...paymentData,
+        createdAt: serverTimestamp()
+      });
+      return docRef.id;
+    } catch (error) {
+      return handleFirestoreError(error, 'create', 'payments');
     }
   },
 

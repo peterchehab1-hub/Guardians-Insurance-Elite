@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { auth } from '../src/lib/firebase';
@@ -16,6 +16,9 @@ import {
   Plus,
   Database
 } from 'lucide-react';
+import { ClientsView } from './ClientsList';
+import { PoliciesView } from './PoliciesList';
+import { PaymentsView } from './PaymentsList';
 
 const DashboardHome: React.FC = () => {
   const [seeding, setSeeding] = React.useState(false);
@@ -73,9 +76,20 @@ const DashboardHome: React.FC = () => {
 };
 
 const Dashboard: React.FC = () => {
-  const { user, loading } = useAuth();
+  const { user, profile, loading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [showGlobalAdd, setShowGlobalAdd] = React.useState(false);
+
+  useEffect(() => {
+    if (!loading && !user) {
+      navigate('/login?role=admin');
+    }
+    // If a client tries to access admin dashboard, send them to client dashboard
+    if (!loading && profile && profile.role === 'client') {
+      navigate('/client-dashboard');
+    }
+  }, [user, profile, loading, navigate]);
 
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center">
@@ -162,17 +176,38 @@ const Dashboard: React.FC = () => {
               <p className="text-teal-primary text-xs font-black tracking-widest uppercase mb-1">Authenticated</p>
               <h1 className="text-4xl font-black text-text-dark">Admin Dashboard</h1>
             </div>
-            <button className="bg-teal-primary hover:bg-teal-primary/90 text-white px-6 py-3 rounded-xl font-bold flex items-center space-x-2 shadow-lg transition-transform active:scale-95">
+            <button 
+              onClick={() => {
+                if (location.pathname === '/dashboard/clients') {
+                  const btn = document.getElementById('add-client-trigger');
+                  if (btn) btn.click();
+                } else if (location.pathname === '/dashboard/policies') {
+                  const btn = document.getElementById('add-policy-trigger');
+                  if (btn) btn.click();
+                } else if (location.pathname === '/dashboard/payments') {
+                  const btn = document.getElementById('add-payment-trigger');
+                  if (btn) btn.click();
+                } else {
+                  alert('Quick add for this section coming soon!');
+                }
+              }}
+              className="bg-teal-primary hover:bg-teal-primary/90 text-white px-6 py-3 rounded-xl font-bold flex items-center space-x-2 shadow-lg transition-transform active:scale-95"
+            >
               <Plus className="w-5 h-5" />
-              <span>Create New Record</span>
+              <span>
+                {location.pathname === '/dashboard/clients' ? 'Add Client' : 
+                 location.pathname === '/dashboard/policies' ? 'Issue Policy' :
+                 location.pathname === '/dashboard/payments' ? 'Record Payment' :
+                 'Create New Record'}
+              </span>
             </button>
           </header>
 
           <Routes>
             <Route index element={<DashboardHome />} />
-            <Route path="clients" element={<div className="bg-white p-20 rounded-[3rem] text-center italic text-gray-400">Clients section coming soon...</div>} />
-            <Route path="policies" element={<div className="bg-white p-20 rounded-[3rem] text-center italic text-gray-400">Policies section coming soon...</div>} />
-            <Route path="payments" element={<div className="bg-white p-20 rounded-[3rem] text-center italic text-gray-400">Payments section coming soon...</div>} />
+            <Route path="clients" element={<ClientsView />} />
+            <Route path="policies" element={<PoliciesView />} />
+            <Route path="payments" element={<PaymentsView />} />
             <Route path="settings" element={<div className="bg-white p-20 rounded-[3rem] text-center italic text-gray-400">Settings section coming soon...</div>} />
           </Routes>
         </motion.div>

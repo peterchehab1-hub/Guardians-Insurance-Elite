@@ -9,6 +9,7 @@ import Services from './pages/Services.tsx';
 import Contact from './pages/Contact.tsx';
 import Login from './pages/Login.tsx';
 import Dashboard from './pages/Dashboard.tsx';
+import ClientDashboard from './pages/ClientDashboard.tsx';
 import { AuthProvider } from './src/contexts/AuthContext.tsx';
 
 const ScrollToTop = () => {
@@ -34,6 +35,7 @@ const App: React.FC = () => {
               <Route path="/contact" element={<Contact />} />
               <Route path="/login" element={<Login />} />
               <Route path="/dashboard/*" element={<Dashboard />} />
+              <Route path="/client-dashboard" element={<ClientDashboard />} />
               <Route path="*" element={<Home />} />
             </Routes>
           </main>

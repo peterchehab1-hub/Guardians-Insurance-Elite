@@ -21,8 +21,8 @@ import { motion } from 'motion/react';
 import { SERVICES_DATA } from '../constants.tsx';
 import PlanComparer from '../src/components/ComparePlans/PlanComparer.tsx';
 import { InsuranceType, Service } from '../types.ts';
-import heroImg from '../src/assets/images/hero-background.png';
-import whatIsInsuranceImg from '../src/assets/images/what-is-insurance.png';
+const heroImg = '/images/hero-background.png';
+const whatIsInsuranceImg = '/images/what-is-insurance.png';
 import { insuranceService } from '../src/services/insuranceService';
 
 const Home: React.FC = () => {

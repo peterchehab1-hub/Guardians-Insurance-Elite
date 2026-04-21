@@ -1,11 +1,11 @@
 
 import { Service, TeamMember, Partner, Testimonial } from './types.ts';
-import homeImg from './src/assets/images/home-insurance.png';
-import carImg from './src/assets/images/car-insurance.png';
-import medicalImg from './src/assets/images/medical-insurance.png';
-import lifeImg from './src/assets/images/life-insurance.png';
-import travelImg from './src/assets/images/travel-insurance.png';
-import businessImg from './src/assets/images/business-insurance.png';
+const homeImg = '/images/home-insurance.png';
+const carImg = '/images/car-insurance.png';
+const medicalImg = '/images/medical-insurance.png';
+const lifeImg = '/images/life-insurance.png';
+const travelImg = '/images/travel-insurance.png';
+const businessImg = '/images/business-insurance.png';
 
 export const SERVICES_DATA: Service[] = [
   {

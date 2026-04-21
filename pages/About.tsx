@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 import { Shield, Award, Users, Clock, Target, Briefcase, CheckCircle2 } from 'lucide-react';
 import { TESTIMONIALS, PARTNERS } from '../constants.tsx';
 import { Quote } from 'lucide-react';
-import heritageImg from '../src/assets/images/about-heritage.png';
+const heritageImg = '/images/about-heritage.png';
 
 const About: React.FC = () => {
   return (
